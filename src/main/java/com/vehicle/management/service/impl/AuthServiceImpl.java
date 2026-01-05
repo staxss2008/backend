@@ -42,7 +42,7 @@ public class AuthServiceImpl implements AuthService {
                           RolePermissionMapper rolePermissionMapper,
                           PermissionMapper permissionMapper,
                           JwtUtil jwtUtil,
-                          RedisTemplate<String, Object> redisTemplate) {
+                          org.springframework.beans.factory.annotation.Autowired(required = false) RedisTemplate<String, Object> redisTemplate) {
         this.userMapper = userMapper;
         this.userRoleMapper = userRoleMapper;
         this.roleMapper = roleMapper;
