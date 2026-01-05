@@ -57,11 +57,15 @@ CREATE TABLE `trip_application` (
   `status` VARCHAR(20) DEFAULT 'PENDING' COMMENT '状态',
   `current_approver` VARCHAR(50) COMMENT '当前审批人',
   `remark` VARCHAR(500) COMMENT '备注',
+  `vehicle_id` BIGINT COMMENT '车辆ID',
+  `driver_id` BIGINT COMMENT '驾驶员ID',
   `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_application_no` (`application_no`),
   INDEX `idx_applicant_id` (`applicant_id`),
-  INDEX `idx_status` (`status`)
+  INDEX `idx_status` (`status`),
+  INDEX `idx_vehicle_id` (`vehicle_id`),
+  INDEX `idx_driver_id` (`driver_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用车申请表';
 
 -- 维修记录表
