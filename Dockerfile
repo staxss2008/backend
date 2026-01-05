@@ -1,5 +1,5 @@
-# 使用官方OpenJDK 21作为基础镜像
-FROM openjdk:21-jre-slim
+# 使用官方Eclipse Temurin JDK 21作为基础镜像
+FROM eclipse-temurin:21-jre-alpine
 
 # 设置工作目录
 WORKDIR /app
