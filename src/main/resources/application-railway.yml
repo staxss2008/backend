@@ -1,0 +1,73 @@
+server:
+  port: ${PORT:8080}
+  servlet:
+    context-path: /vehicle-management
+
+spring:
+  application:
+    name: vehicle-management
+  redis:
+    enabled: ${REDIS_ENABLED:false}
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:}
+    database: 0
+    timeout: 3000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/vehicle_management?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:root}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-test-query: SELECT 1
+  sql:
+    init:
+      mode: never
+      schema-locations: classpath:init.sql
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  type-aliases-package: com.vehicle.management.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      not-delete-value: 0
+
+# Swagger配置
+swagger:
+  enable: ${SWAGGER_ENABLED:true}
+  production: ${SWAGGER_PRODUCTION:false}
+  authorization:
+    enabled: false
+  info:
+    title: 派车管理系统API
+    description: 派车管理系统后端API接口文档
+    version: 1.0.0
+    contact:
+      name: 开发团队
+      email: dev@example.com
+
+# 日志配置
+logging:
+  level:
+    com.vehicle.management: ${LOG_LEVEL:info}
+    org.springframework.security: ${SECURITY_LOG_LEVEL:info}
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

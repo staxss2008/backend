@@ -5,7 +5,8 @@ nixPkgs = ["openjdk21"]
 cmds = ["mvn clean package -DskipTests"]
 
 [start]
-cmd = "java -jar target/vehicle-management-1.0.0.war"
+cmd = "java -jar -Dspring.profiles.active=railway target/vehicle-management-1.0.0.war"
 
 [variables]
 PORT = "8080"
+SPRING_PROFILES_ACTIVE = "railway"
