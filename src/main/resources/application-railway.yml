@@ -36,12 +36,6 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
-      maximum-pool-size: 10
-      minimum-idle: 5
-      connection-timeout: 30000
-      idle-timeout: 600000
-      max-lifetime: 1800000
-      connection-test-query: SELECT 1
   sql:
     init:
       mode: never
