@@ -1,6 +1,7 @@
 package com.vehicle.management.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -87,4 +88,16 @@ public class DispatchOrder {
      * 创建时间
      */
     private LocalDateTime createdAt;
+
+    /**
+     * 车辆信息（非数据库字段，仅用于关联查询）
+     */
+    @TableField(exist = false)
+    private Vehicle vehicle;
+
+    /**
+     * 驾驶员信息（非数据库字段，仅用于关联查询）
+     */
+    @TableField(exist = false)
+    private Driver driver;
 }

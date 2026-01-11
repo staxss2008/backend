@@ -1,5 +1,0 @@
-[phases.build]
-cmds = ["mvn clean package -DskipTests"]
-
-[phases.start]
-cmds = ["java -jar target/*.jar --server.port=$PORT"]

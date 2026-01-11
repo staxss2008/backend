@@ -1,6 +1,7 @@
 package com.vehicle.management.controller;
 
 import com.vehicle.management.dto.DispatchOrderDTO;
+import com.vehicle.management.entity.DispatchOrder;
 import com.vehicle.management.service.DispatchService;
 import com.vehicle.management.vo.DispatchMonitorVO;
 import com.vehicle.management.vo.SmartDispatchResultVO;
@@ -51,5 +52,28 @@ public class DispatchController {
     public Result<List<VehicleLocationVO>> getRealTimeLocation() {
         List<VehicleLocationVO> locations = dispatchService.getRealTimeLocation();
         return Result.success(locations);
+    }
+
+    @PostMapping("/update-start-mileage")
+    @ApiOperation("更新开始里程（出车时填写）")
+    public Result<Boolean> updateStartMileage(@RequestParam Long orderId, 
+                                             @RequestParam java.math.BigDecimal startMileage) {
+        boolean success = dispatchService.updateStartMileage(orderId, startMileage);
+        return Result.success(success);
+    }
+
+    @PostMapping("/update-end-mileage")
+    @ApiOperation("更新结束里程（收车时填写）")
+    public Result<Boolean> updateEndMileage(@RequestParam Long orderId, 
+                                           @RequestParam java.math.BigDecimal endMileage) {
+        boolean success = dispatchService.updateEndMileage(orderId, endMileage);
+        return Result.success(success);
+    }
+
+    @GetMapping("/list")
+    @ApiOperation("获取调度列表")
+    public Result<java.util.List<DispatchOrder>> getDispatchList() {
+        java.util.List<DispatchOrder> list = dispatchService.getDispatchList();
+        return Result.success(list);
     }
 }

@@ -8,7 +8,7 @@
     <groupId>com.vehicle</groupId>
     <artifactId>vehicle-management</artifactId>
     <version>1.0.0</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>Vehicle Management System</name>
     <description>派车管理系统后端</description>
 
@@ -33,6 +33,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Tomcat -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Spring Boot Security Starter -->

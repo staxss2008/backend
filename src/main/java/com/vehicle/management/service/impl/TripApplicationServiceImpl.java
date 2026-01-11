@@ -7,9 +7,11 @@ import com.vehicle.management.dto.DispatchOrderDTO;
 import com.vehicle.management.dto.TripApplicationDTO;
 import com.vehicle.management.entity.Driver;
 import com.vehicle.management.entity.TripApplication;
+import com.vehicle.management.entity.User;
 import com.vehicle.management.entity.Vehicle;
 import com.vehicle.management.mapper.DriverMapper;
 import com.vehicle.management.mapper.TripApplicationMapper;
+import com.vehicle.management.mapper.UserMapper;
 import com.vehicle.management.mapper.VehicleMapper;
 import com.vehicle.management.service.DispatchService;
 import com.vehicle.management.service.TripApplicationService;
@@ -35,15 +37,18 @@ public class TripApplicationServiceImpl implements TripApplicationService {
     private final DispatchService dispatchService;
     private final VehicleMapper vehicleMapper;
     private final DriverMapper driverMapper;
+    private final UserMapper userMapper;
 
     public TripApplicationServiceImpl(TripApplicationMapper tripApplicationMapper,
                                   DispatchService dispatchService,
                                   VehicleMapper vehicleMapper,
-                                  DriverMapper driverMapper) {
+                                  DriverMapper driverMapper,
+                                  UserMapper userMapper) {
         this.tripApplicationMapper = tripApplicationMapper;
         this.dispatchService = dispatchService;
         this.vehicleMapper = vehicleMapper;
         this.driverMapper = driverMapper;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -94,12 +99,24 @@ public class TripApplicationServiceImpl implements TripApplicationService {
         String applicationNo = generateApplicationNo();
         application.setApplicationNo(applicationNo);
 
+        // 获取当前登录用户信息
+        Long currentUserId = com.vehicle.management.util.SecurityUtil.getCurrentUserId();
+        if (currentUserId == null) {
+            throw new RuntimeException("未登录或登录已过期");
+        }
+
+        // 查询当前用户详细信息
+        User currentUser = userMapper.selectById(currentUserId);
+        if (currentUser == null) {
+            throw new RuntimeException("用户不存在");
+        }
+
         // 设置默认值
         application.setStatus("PENDING"); // 默认状态为待审批
-        application.setApplicantId(1L); // TODO: 从当前登录用户获取
-        application.setApplicantName("张三"); // TODO: 从当前登录用户获取
-        application.setDepartmentId(1L); // TODO: 从当前登录用户获取
-        application.setDepartmentName("行政部"); // TODO: 从当前登录用户获取
+        application.setApplicantId(currentUser.getId()); // 从当前登录用户获取
+        application.setApplicantName(currentUser.getRealName()); // 从当前登录用户获取
+        application.setDepartmentId(null); // TODO: 从用户部门信息获取
+        application.setDepartmentName(currentUser.getDepartment()); // 从当前登录用户获取
         application.setCurrentApprover("李四"); // TODO: 从审批流程配置获取
         application.setCreatedAt(LocalDateTime.now());
 

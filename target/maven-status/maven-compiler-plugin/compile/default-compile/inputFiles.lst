@@ -11,7 +11,6 @@ E:\JSPwork\WORKPLACE\backend\src\main\java\com\vehicle\management\service\impl\R
 E:\JSPwork\WORKPLACE\backend\src\main\java\com\vehicle\management\service\impl\UserServiceImpl.java
 E:\JSPwork\WORKPLACE\backend\src\main\java\com\vehicle\management\annotation\RequirePermission.java
 E:\JSPwork\WORKPLACE\backend\src\main\java\com\vehicle\management\service\RoleService.java
-E:\JSPwork\WORKPLACE\backend\src\main\java\com\vehicle\management\util\ApplicationContextProvider.java
 E:\JSPwork\WORKPLACE\backend\src\main\java\com\vehicle\management\config\WebConfig.java
 E:\JSPwork\WORKPLACE\backend\src\main\java\com\vehicle\management\util\SecurityUtil.java
 E:\JSPwork\WORKPLACE\backend\src\main\java\com\vehicle\management\entity\TripApplication.java
