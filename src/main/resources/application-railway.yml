@@ -24,13 +24,18 @@ spring:
     url: jdbc:mysql://${MYSQLHOST:tramway.proxy.rlwy.net}:${MYSQLPORT:30019}/${MYSQLDATABASE:railway}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=true&allowPublicKeyRetrieval=true
     username: ${MYSQLUSER:root}
     password: ${MYSQLPASSWORD:qdeUFpvPvmQECCretNcCBzXNcGxsmXKG}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-test-query: SELECT 1
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: none
     show-sql: true
-  datasource:
-    hikari:
       maximum-pool-size: 10
       minimum-idle: 5
       connection-timeout: 30000
