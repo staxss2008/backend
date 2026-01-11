@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["openjdk21"]
+nixPkgs = ["openjdk21", "maven"]
 
 [phases.build]
 cmds = ["mvn clean package -DskipTests"]
