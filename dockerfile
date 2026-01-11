@@ -22,4 +22,4 @@ ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # 启动应用
-CMD ["java", "-jar", "target/vehicle-management-1.0.0.war"]
+CMD ["java", "-Dspring.profiles.active=railway", "-jar", "target/vehicle-management-1.0.0.war"]

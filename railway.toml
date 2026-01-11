@@ -4,7 +4,7 @@
 builder = "NIXPACKS"
 
 [deploy]
-startCommand = "java -jar target/vehicle-management-1.0.0.war"
+startCommand = "java -Dspring.profiles.active=railway -jar target/vehicle-management-1.0.0.war"
 # healthcheckPath = "/vehicle-management/api/auth/current"
 # healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
