@@ -9,7 +9,16 @@ import org.mybatis.spring.annotation.MapperScan;
 /**
  * 派车管理系统主应用类
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+    org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration.class,
+    org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration.class,
+    org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration.class
+})
+@MapperScan("com.vehicle.management.mapper")(exclude = {
+    org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration.class,
+    org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration.class,
+    org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration.class
+})
 @MapperScan("com.vehicle.management.mapper")
 public class VehicleManagementApplication extends SpringBootServletInitializer {
     
