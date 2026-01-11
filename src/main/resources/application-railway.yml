@@ -21,9 +21,9 @@ spring:
         min-idle: 0
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/vehicle_management?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
-    username: ${DATABASE_USERNAME:root}
-    password: ${DATABASE_PASSWORD:root}
+    url: jdbc:mysql://${MYSQLHOST:mysql.railway.internal}:${MYSQLPORT:3306}/${MYSQLDATABASE:railway}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${MYSQLUSER:root}
+    password: ${MYSQLPASSWORD:root}
     hikari:
       maximum-pool-size: 10
       minimum-idle: 5
