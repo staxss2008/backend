@@ -21,7 +21,7 @@ spring:
         min-idle: 0
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQLHOST:tramway.proxy.rlwy.net}:${MYSQLPORT:30019}/${MYSQLDATABASE:railway}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=true&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://${MYSQLHOST:mysql.railway.internal}:${MYSQLPORT:3306}/${MYSQLDATABASE:railway}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
     username: ${MYSQLUSER:root}
     password: ${MYSQLPASSWORD:qdeUFpvPvmQECCretNcCBzXNcGxsmXKG}
     hikari:
