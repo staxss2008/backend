@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
+import javax.sql.DataSource;
+
 /**
  * Railway数据库配置
  * 处理Railway提供的mysql://格式URL转换为jdbc:mysql://格式
@@ -14,13 +16,12 @@ public class RailwayDatabaseConfig {
 
     @Bean
     @Primary
-    public DataSourceProperties dataSourceProperties() {
-        DataSourceProperties properties = new DataSourceProperties();
-        String url = System.getenv("MYSQL_URL");
+    public DataSource dataSource(DataSourceProperties properties) {
+        String url = properties.getUrl();
         if (url != null && url.startsWith("mysql://")) {
             url = url.replace("mysql://", "jdbc:mysql://");
             properties.setUrl(url);
         }
-        return properties;
+        return properties.initializeDataSourceBuilder().build();
     }
 }
