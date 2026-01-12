@@ -225,7 +225,7 @@ public class TripApplicationServiceImpl implements TripApplicationService {
         if (vehicleId != null) {
             Vehicle vehicle = vehicleMapper.selectById(vehicleId);
             if (vehicle != null) {
-                vehicle.setStatus("IN_USE");
+                vehicle.setStatus("BUSY");
                 vehicleMapper.updateById(vehicle);
             }
         }
