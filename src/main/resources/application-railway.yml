@@ -21,9 +21,9 @@ spring:
         min-idle: 0
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DATABASE_URL:jdbc:mysql://${MYSQLHOST:mysql.railway.internal}:${MYSQLPORT:3306}/${MYSQLDATABASE:railway}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=true&allowPublicKeyRetrieval=true&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&failOverReadOnly=false&maxReconnects=10}
-    username: ${DATABASE_USERNAME:${MYSQLUSER:root}}
-    password: ${DATABASE_PASSWORD:${MYSQLPASSWORD:qdeUFpvPvmQECCretNcCBzXNcGxsmXKG}}
+    url: ${RAILWAY_DATABASE_URL:${DATABASE_URL:jdbc:mysql://${RAILWAY_MYSQLHOST:${MYSQLHOST:mysql.railway.internal}}:${RAILWAY_MYSQLPORT:${MYSQLPORT:3306}}/${RAILWAY_MYSQLDATABASE:${MYSQLDATABASE:railway}}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=true&allowPublicKeyRetrieval=true&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&failOverReadOnly=false&maxReconnects=10}}
+    username: ${RAILWAY_MYSQLUSER:${DATABASE_USERNAME:${MYSQLUSER:root}}}
+    password: ${RAILWAY_MYSQLPASSWORD:${DATABASE_PASSWORD:${MYSQLPASSWORD:}}}
     hikari:
       maximum-pool-size: 10
       minimum-idle: 2
