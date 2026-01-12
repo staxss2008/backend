@@ -96,7 +96,6 @@ public class DispatchServiceImpl implements DispatchService {
     @Override
     public List<VehicleLocationVO> getRealTimeLocation() {
         // 查询所有车辆及其位置信息
-        // 这里为演示目的，返回模拟数据
         return vehicleMapper.selectList(null).stream().map(vehicle -> {
             VehicleLocationVO locationVO = new VehicleLocationVO();
             locationVO.setVehicleId(vehicle.getId());
@@ -104,7 +103,26 @@ public class DispatchServiceImpl implements DispatchService {
             locationVO.setStatus(vehicle.getStatus());
             locationVO.setLongitude(116.397428); // 模拟位置
             locationVO.setLatitude(39.90923);    // 模拟位置
-            locationVO.setDriverName("张三");
+            
+            // 查询该车辆正在执行的调度单
+            DispatchOrder activeOrder = dispatchOrderMapper.selectList(null).stream()
+                .filter(order -> order.getVehicleId().equals(vehicle.getId())
+                    && ("PENDING".equals(order.getStatus()) || "IN_PROGRESS".equals(order.getStatus())))
+                .findFirst()
+                .orElse(null);
+            
+            // 如果有正在执行的调度单，则返回指派的驾驶员
+            if (activeOrder != null && activeOrder.getDriverId() != null) {
+                Driver driver = driverMapper.selectById(activeOrder.getDriverId());
+                if (driver != null) {
+                    locationVO.setDriverName(driver.getName());
+                } else {
+                    locationVO.setDriverName("未指派");
+                }
+            } else {
+                locationVO.setDriverName("未指派");
+            }
+            
             return locationVO;
         }).collect(Collectors.toList());
     }
